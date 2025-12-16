@@ -1,0 +1,179 @@
+{
+  "input": {
+    "workflow": {
+      "9": {
+        "inputs": {
+          "filename_prefix": "z-image",
+          "images": [
+            "43",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "SaveImage"
+        }
+      },
+      "39": {
+        "inputs": {
+          "filename": "qwen_3_4b.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "40": {
+        "inputs": {
+          "filename": "ae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "41": {
+        "inputs": {
+          "width": 768,
+          "height": 1280,
+          "batch_size": 1
+        },
+        "class_type": "EmptySD3LatentImage",
+        "_meta": {
+          "title": "EmptySD3LatentImage"
+        }
+      },
+      "42": {
+        "inputs": {
+          "conditioning": [
+            "45",
+            0
+          ]
+        },
+        "class_type": "ConditioningZeroOut",
+        "_meta": {
+          "title": "ConditioningZeroOut"
+        }
+      },
+      "43": {
+        "inputs": {
+          "samples": [
+            "44",
+            0
+          ],
+          "vae": [
+            "40",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "44": {
+        "inputs": {
+          "seed": 677170956248637,
+          "steps": 9,
+          "cfg": 1,
+          "sampler_name": "res_multistep",
+          "scheduler": "simple",
+          "denoise": 1,
+          "model": [
+            "47",
+            0
+          ],
+          "positive": [
+            "45",
+            0
+          ],
+          "negative": [
+            "42",
+            0
+          ],
+          "latent_image": [
+            "41",
+            0
+          ]
+        },
+        "class_type": "KSampler",
+        "_meta": {
+          "title": "KSampler"
+        }
+      },
+      "45": {
+        "inputs": {
+          "text": "Retro British fashion magazine cover style: elegant blonde woman in her 30s standing centered on the sweeping lawn of a grand English country manor with ivy-covered brick facade and stone steps behind, wearing classic dark plaid wool coat-dress with gold silk scarf at neck, white socks and black loafers, holding leashes of two symmetrical Pembroke Welsh corgis sitting on grass, soft golden hour sunlight with gentle shadows, subtle film grain, nostalgic Kodachrome color grading, vertical full-body wide shot, massive bold white serif masthead across the top, clean white English cover lines along the bottom",
+          "clip": [
+            "39",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIPTextEncode"
+        }
+      },
+      "46": {
+        "inputs": {
+          "filename": "z_image_turbo_bf16.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "47": {
+        "inputs": {
+          "value": 3,
+          "model": [
+            "48",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingAuraFlow",
+        "_meta": {
+          "title": "ModelSamplingAuraFlow"
+        }
+      },
+      "48": {
+        "inputs": {
+          "filename": "pixel_art_style_z_image_turbo.safetensors",
+          "model": [
+            "46",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "57": {
+        "inputs": {
+          "text": "z-Image",
+          "images": [
+            "43",
+            0
+          ]
+        },
+        "class_type": "SaveImageS3",
+        "_meta": {
+          "title": "SaveImageS3"
+        }
+      },
+      "59": {
+        "inputs": {
+          "source": [
+            "57",
+            0
+          ]
+        },
+        "class_type": "PreviewAny",
+        "_meta": {
+          "title": "PreviewAny"
+        }
+      }
+    }
+  }
+}
